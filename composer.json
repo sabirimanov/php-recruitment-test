@@ -9,6 +9,10 @@
     "psr-4": {
       "Snowdog\\DevTest\\": "src"
     },
+    "classmap": [
+      "lib/CacheWarm.php",
+      "lib/StaticHostnameResolver.php"
+    ],
     "files": [
       "src/components.php"
     ]
