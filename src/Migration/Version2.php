@@ -51,6 +51,7 @@ CREATE TABLE `pages` (
   `page_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url` varchar(255) NOT NULL,
   `website_id` int(11) unsigned NOT NULL,
+  `last_visited` DATETIME NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`page_id`),
   KEY `website_id` (`website_id`),
   CONSTRAINT `page_website_fk` FOREIGN KEY (`website_id`) REFERENCES `websites` (`website_id`)
