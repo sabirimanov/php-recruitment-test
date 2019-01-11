@@ -24,6 +24,11 @@ class CreateWebsiteAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+             header('Location: /login');
+             exit;
+        }
+
         $name = $_POST['name'];
         $hostname = $_POST['hostname'];
 

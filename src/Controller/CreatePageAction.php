@@ -18,6 +18,11 @@ class CreatePageAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+             header('Location: /login');
+             exit;
+        }
+        
         $url = $_POST['url'];
         $websiteId = $_POST['website_id'];
 

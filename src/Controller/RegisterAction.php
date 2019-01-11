@@ -19,26 +19,30 @@ class RegisterAction
 
     public function execute()
     {
-        $password = $_POST['password'];
-        $confirm = $_POST['confirm'];
-        $name = $_POST['name'];
-        $login = $_POST['login'];
-        
-        if($password != $confirm) {
-            $_SESSION['flash'] = 'Given passwords do not match';
-        } else if (empty($password)) {
-            $_SESSION['flash'] = 'Password cannot be empty!';
-        } else if (empty($login) || empty($name)) {
-            $_SESSION['flash'] = 'Name or login cannot be empty!';
+        if (isset($_SESSION['login'])) {
+            include __DIR__ . '/../view/403.phtml'; 
         } else {
-            if($this->userManager->create($login, $password, $name)) {
-                $_SESSION['flash'] = 'Hello ' . $name . '!';
-                $_SESSION['login'] = $login;
-                header('Location: /');
-                return;
+            $password = $_POST['password'];
+            $confirm = $_POST['confirm'];
+            $name = $_POST['name'];
+            $login = $_POST['login'];
+
+            if($password != $confirm) {
+                $_SESSION['flash'] = 'Given passwords do not match';
+            } else if (empty($password)) {
+                $_SESSION['flash'] = 'Password cannot be empty!';
+            } else if (empty($login) || empty($name)) {
+                $_SESSION['flash'] = 'Name or login cannot be empty!';
+            } else {
+                if($this->userManager->create($login, $password, $name)) {
+                    $_SESSION['flash'] = 'Hello ' . $name . '!';
+                    $_SESSION['login'] = $login;
+                    header('Location: /');
+                    return;
+                }
             }
+
+            header('Location: /register');
         }
-        
-        header('Location: /register');
     }
 }

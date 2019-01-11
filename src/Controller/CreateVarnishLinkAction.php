@@ -33,6 +33,11 @@ class CreateVarnishLinkAction
     {
         // TODO: add module logic here
 
+	        if (!isset($_SESSION['login'])) {
+	             header('Location: /login');
+	             exit;
+	        }
+          
 	        $is_checked = $_POST['isChecked'];
 	        $varnish_id = $_POST['varnish'];
 	        $website_id = $_POST['website'];

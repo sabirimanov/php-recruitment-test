@@ -36,7 +36,11 @@ class WebsiteAction
 
     public function execute($id)
     {
-        if (isset($_SESSION['login'])) {
+
+        if (!isset($_SESSION['login'])) {
+              header('Location: /login');
+              exit;
+        } else {
             $user = $this->userManager->getByLogin($_SESSION['login']);
 
             $website = $this->websiteManager->getById($id);
@@ -44,16 +48,16 @@ class WebsiteAction
             if ($website->getUserId() == $user->getUserId()) {
                 $this->website = $website;
             }
-        }
 
-        require __DIR__ . '/../view/website.phtml';
+            require __DIR__ . '/../view/website.phtml';
+        }
     }
 
     protected function getPages()
     {
         if($this->website) {
             return $this->pageManager->getAllByWebsite($this->website);
-        } 
+        }
         return [];
     }
 }

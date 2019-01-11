@@ -19,21 +19,25 @@ class LoginAction
 
     public function execute()
     {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
+        if (isset($_SESSION['login'])) {
+            include __DIR__ . '/../view/403.phtml';
+        } else {
+            $login = $_POST['login'];
+            $password = $_POST['password'];
 
-        /** @var User $user */
-        $user = $this->userManager->getByLogin($login);
-        if($user) {
-            if($this->userManager->verifyPassword($user, $password)) {
-                $_SESSION['login'] = $login;
-                $_SESSION['flash'] = 'Hello ' . $user->getDisplayName() . '!';
-                header('Location: /');
-                return;
+            /** @var User $user */
+            $user = $this->userManager->getByLogin($login);
+            if($user) {
+                if($this->userManager->verifyPassword($user, $password)) {
+                    $_SESSION['login'] = $login;
+                    $_SESSION['flash'] = 'Hello ' . $user->getDisplayName() . '!';
+                    header('Location: /');
+                    return;
+                }
             }
-        }
 
-        $_SESSION['flash'] = 'Incorrect login or password';
-        header('Location: /');
+            $_SESSION['flash'] = 'Incorrect login or password';
+            header('Location: /');
+        }
     }
 }

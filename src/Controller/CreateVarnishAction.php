@@ -20,6 +20,11 @@ class CreateVarnishAction
 
     public function execute()
     {
+        if (!isset($_SESSION['login'])) {
+             header('Location: /login');
+             exit;
+        }
+        
         $ip = $_POST['ip'];
 
         // TODO - add module logic here

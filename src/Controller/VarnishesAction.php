@@ -63,6 +63,10 @@ class VarnishesAction
 
     public function execute() {
 
+        if (!isset($_SESSION['login'])) {
+             header('Location: /login');
+             exit;
+        }
         include __DIR__ . '/../view/varnish.phtml';
     }
 
