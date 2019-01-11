@@ -30,7 +30,7 @@
     <div>
 
         <div class="padded">
-            <form class="form-inline" method="post" action="/varnish">
+            <form class="form-inline" method="post" action="/varnishes">
                 <div class="form-group">
                     <label for="exampleInputName2">IP</label>
                     <input type="text" name="ip" class="form-control" id="exampleInputName2"
@@ -57,7 +57,7 @@
                     </tr>
                     <?php foreach ($this->getWebsites() as $website): /** @var \Snowdog\DevTest\Model\Website $website */ ?>
                         <tr>
-                            <td><input type="checkbox" <?= in_array($website->getWebsiteId(), $websiteIds) ? 'checked="checked"' : '' ?>/></td>
+                            <td><input type="checkbox" data-varnish="<?=$varnish->getVarnishId()?>" value="<?=$website->getWebsiteId()?>" <?= in_array($website->getWebsiteId(), $websiteIds) ? 'checked="checked"' : '' ?> onclick="varnish_to_website(this)" /></td>
                             <td><?= $website->getName() ?></td>
                             <td><?= $website->getHostname() ?></td>
                         </tr>
@@ -71,5 +71,33 @@
 </div><!-- /.container -->
 
 
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+function varnish_to_website(checkbox) {
+		var checkbox = $(checkbox),
+		varnish_id = checkbox.data('varnish'),
+		website_id = checkbox.val(),
+		is_checked = 0;
+
+    if (checkbox.is(":checked")) {
+      is_checked = 1;
+    }
+
+		$('input[type=checkbox][value='+website_id+'][data-varnish!='+varnish_id+']').prop('checked', false);
+
+    $.ajax({
+			url: 	"/varnish2website",
+			type: 'POST',
+			data: {
+				varnish : 	varnish_id,
+				website : 	website_id,
+				isChecked: 	is_checked,
+			},
+			success: 	function(response){
+				alert(response)
+			},
+		});
+	}
+</script>
 </body>
 </html>

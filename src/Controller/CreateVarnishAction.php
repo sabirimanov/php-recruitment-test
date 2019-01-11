@@ -24,6 +24,20 @@ class CreateVarnishAction
 
         // TODO - add module logic here
 
-        header('Location: /varnish');
+        if(!empty($ip)) {
+            if (isset($_SESSION['login'])) {
+                $logged_user = $this->userManager->getByLogin($_SESSION['login']);
+
+                if ($logged_user) {
+                    if ($this->varnishManager->create($logged_user, $ip)) {
+                        $_SESSION['flash'] = 'Varnish IP ' . $ip . ' was successfully added';
+                    }
+                }
+            }
+        } else {
+            $_SESSION['flash'] = 'Error: Varnish IP cannot be empty';
+        }
+
+        header('Location: /varnishes');
     }
 }

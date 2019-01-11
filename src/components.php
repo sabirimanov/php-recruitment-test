@@ -18,6 +18,10 @@ use Snowdog\DevTest\Controller\WebsiteAction;
 use Snowdog\DevTest\Menu\RegisterMenu;
 use Snowdog\DevTest\Controller\LoginAction;
 use Snowdog\DevTest\Controller\RegisterAction;
+use Snowdog\DevTest\Menu\VarnishesMenu;
+use Snowdog\DevTest\Controller\VarnishesAction;
+use Snowdog\DevTest\Controller\CreateVarnishAction;
+use Snowdog\DevTest\Controller\CreateVarnishLinkAction;
 
 Menu::register(RegisterMenu::class, 250);
 CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
@@ -34,3 +38,8 @@ RouteRepository::registerRoute('GET', '/register', RegisterFormAction::class, 'e
 Menu::register(LoginMenu::class, 200);
 RouteRepository::registerRoute('POST', '/login', LoginAction::class, 'execute');
 RouteRepository::registerRoute('GET', '/website/{id:\d+}', WebsiteAction::class, 'execute');
+
+Menu::register(VarnishesMenu::class, 11);
+RouteRepository::registerRoute('GET', '/varnishes', VarnishesAction::class, 'execute');
+RouteRepository::registerRoute('POST', '/varnishes', CreateVarnishAction::class, 'execute');
+RouteRepository::registerRoute('POST', '/varnish2website', CreateVarnishLinkAction::class, 'execute');

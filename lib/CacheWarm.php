@@ -13,6 +13,21 @@ class Old_Legacy_CacheWarmer_Resolver_Method implements Old_Legacy_CacheWarmer_R
     }
 }
 
+class Old_Legacy_CacheWarmer_Resolver_Varnish implements Old_Legacy_CacheWarmer_Resolver_Interface
+	{
+	    private $varnish_ip;
+
+	    public function __construct($varnish_ip)
+	    {
+	        $this->varnish_ip = $varnish_ip;
+	    }
+
+	    public function getIp($hostname = null)
+	    {
+	        return $this->varnish_ip;
+	    }
+	}
+
 class Old_Legacy_CacheWarmer_Actor
 {
     private $callable;
@@ -20,7 +35,7 @@ class Old_Legacy_CacheWarmer_Actor
     public function setActor($callable) {
         $this->callable = $callable;
     }
-    
+
     public function act($hostname, $ip, $url)
     {
         call_user_func($this->callable, $hostname, $ip, $url);
