@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4add83416b0cf08394d9039a547073ce",
+    "content-hash": "2fca487b8dc59110d71963fa6ea2a220",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -367,6 +367,33 @@
             "time": "2018-11-20T15:27:04+00:00"
         },
         {
+            "name": "sabirimanov/sd-sitemap-import",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabirimanov/sd-sitemap-import.git",
+                "reference": "cad6dcb743cde791a03f5b5607de873f28390941"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabirimanov/sd-sitemap-import/zipball/cad6dcb743cde791a03f5b5607de873f28390941",
+                "reference": "cad6dcb743cde791a03f5b5607de873f28390941",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SnowDogSitemap\\SitemapImporter\\": "/"
+                }
+            },
+            "description": "Sitemap importer",
+            "support": {
+                "source": "https://github.com/sabirimanov/sd-sitemap-import/tree/master",
+                "issues": "https://github.com/sabirimanov/sd-sitemap-import/issues"
+            },
+            "time": "2019-01-11T03:55:00+00:00"
+        },
+        {
             "name": "symfony/console",
             "version": "v3.4.21",
             "source": {
@@ -554,7 +581,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "sabirimanov/sd-sitemap-import": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

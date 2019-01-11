@@ -1,9 +1,16 @@
 {
   "name": "snowdogapps/dev-test",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sabirimanov/sd-sitemap-import.git"
+    }
+  ],
   "require": {
     "nikic/fast-route": "^1.0",
     "php-di/php-di": "^5.3",
-    "mnapoli/silly": "^1.3"
+    "mnapoli/silly": "^1.3",
+    "sabirimanov/sd-sitemap-import": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -15,9 +22,6 @@
     ],
     "files": [
       "src/components.php"
-    ],
-    "psr-4": {
-      "Snowdog\\DevTest\\": "src"
-    }
+    ]
   }
 }

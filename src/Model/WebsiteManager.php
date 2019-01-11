@@ -15,7 +15,7 @@ class WebsiteManager
     {
         $this->database = $database;
     }
-    
+
     public function getById($websiteId) {
         /** @var \PDOStatement $query */
         $query = $this->database->prepare('SELECT * FROM websites WHERE website_id = :id');
@@ -25,6 +25,17 @@ class WebsiteManager
         /** @var Website $website */
         $website = $query->fetch(\PDO::FETCH_CLASS);
         return $website;
+    }
+
+    public function getWebsiteByHostname($hostname)
+    {
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare(
+            'SELECT * FROM `websites` WHERE `hostname` = :hostname'
+        );
+        $query->bindParam(':hostname', $hostname);
+        $query->execute();
+        return $query->fetchObject(Website::class);
     }
 
     public function getAllByUser(User $user)

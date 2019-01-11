@@ -1,5 +1,4 @@
 <?php
-
 use Snowdog\DevTest\Controller\LoginFormAction;
 use Snowdog\DevTest\Component\Migrations;
 use Snowdog\DevTest\Controller\LogoutAction;
@@ -22,6 +21,8 @@ use Snowdog\DevTest\Menu\VarnishesMenu;
 use Snowdog\DevTest\Controller\VarnishesAction;
 use Snowdog\DevTest\Controller\CreateVarnishAction;
 use Snowdog\DevTest\Controller\CreateVarnishLinkAction;
+use SnowDogSitemap\SitemapImporter\Command\SitemapCommand;
+use SnowDogSitemap\SitemapImporter\Controller\ImportSitemapAction;
 
 Menu::register(RegisterMenu::class, 250);
 CommandRepository::registerCommand('migrate_db', MigrateCommand::class);
@@ -43,3 +44,7 @@ Menu::register(VarnishesMenu::class, 11);
 RouteRepository::registerRoute('GET', '/varnishes', VarnishesAction::class, 'execute');
 RouteRepository::registerRoute('POST', '/varnishes', CreateVarnishAction::class, 'execute');
 RouteRepository::registerRoute('POST', '/varnish2website', CreateVarnishLinkAction::class, 'execute');
+
+
+CommandRepository::registerCommand('sitemap [user]', SitemapCommand::class);
+RouteRepository::registerRoute('POST', '/sitemap', ImportSitemapAction::class, 'execute');

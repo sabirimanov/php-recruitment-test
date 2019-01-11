@@ -27,6 +27,15 @@ class PageManager
         return $query->fetchAll(\PDO::FETCH_CLASS, Page::class);
     }
 
+    public function getPageByURL($url)
+    {
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT * FROM pages WHERE url = :url');
+        $query->bindParam(':url', $url, \PDO::PARAM_STR);
+        $query->execute();
+        return $query->fetchAll(\PDO::FETCH_CLASS, Page::class);
+	  }
+
     public function create(Website $website, $url)
     {
         $websiteId = $website->getWebsiteId();
