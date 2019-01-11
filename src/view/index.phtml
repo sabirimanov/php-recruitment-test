@@ -65,6 +65,23 @@
                     <?php endforeach ?>
                 </table>
             </div>
+            <div class="padded">
+                <h2>Statistics</h2>
+                <table class="table">
+                    <tr>
+                        <td>Total number of pages associated with this user</td>
+                        <td><?=$this->user->totalVisitedPages()?></td>
+                    </tr>
+                    <tr>
+                        <td>Least recently visited page</td>
+                        <td><?=$this->user->leastRecentPage()?></td>
+                    </tr>
+                    <tr>
+                        <td>Most recently visited page</td>
+                        <td><?=$this->user->mostRecentPage()?></td>
+                    </tr>
+                </table>
+            </div>
         <?php endif ?>
     </div>
 
